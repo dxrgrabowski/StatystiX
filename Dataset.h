@@ -6,7 +6,7 @@
 #include <QtCore>
 #include <cmath>
 #include <algorithm>
-#include <variant>
+//#include <variant>
 
 class Dataset {
 
@@ -22,11 +22,8 @@ public:
     }
 
 
-//    double minValue() const {
-//        return *std::min_element(dataset.begin(), dataset.end()).toDouble();
-//    }
 
-    void debug() {
+    void debugDataset() {
         qDebug() << "Dataset:";
         for (const auto& value : JSONdataset) {
             if (value.isDouble()) {
@@ -127,9 +124,12 @@ public:
     }
 
 
+
     bool isIntegral(double d) {
         return std::floor(d) == d;
     }
+
+
 
     bool isIntegral(QJsonValueRef value)
     {
@@ -148,6 +148,8 @@ public:
             return false;
         }
     }
+
+
 
     double toDouble (const std::variant<int, double>& value) const {
         if (std::holds_alternative<int>(value)) {

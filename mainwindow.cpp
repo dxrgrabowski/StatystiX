@@ -6,6 +6,7 @@
 #include <QJsonObject>
 #include <QJsonArray>
 #include <QDebug>
+#include <QDesktopServices>
 #include "Dataset.h"
 
 
@@ -22,7 +23,7 @@ MainWindow::~MainWindow()
 }
 
 
-void MainWindow::on_pushButton_clicked()
+void MainWindow::on_openFileButton_clicked()
 {
     QString filename=QFileDialog::getOpenFileName(this,tr("Open File"),"D:/Projects/Qt/Calc/res","JSON file (*.json)");
     //QMessageBox::information(this,tr("File Name"), filename);
@@ -57,8 +58,9 @@ void MainWindow::on_pushButton_clicked()
 
     ui->XoutputPlainTextEdit->setPlainText(XoutputText);
     ui->YoutputPlainTextEdit->setPlainText(YoutputText);
-    x.debug();
 }
+
+
 
 QPair<bool, QJsonObject> MainWindow::parseFile(QString& filename)
 {
@@ -82,3 +84,11 @@ QPair<bool, QJsonObject> MainWindow::parseFile(QString& filename)
 
     return { true, doc.object() };
 }
+
+
+
+void MainWindow::on_githubButton_clicked()
+{
+    QDesktopServices::openUrl(QUrl("https://github.com/dxrgrabowski/StatystiX", QUrl::TolerantMode));
+}
+
