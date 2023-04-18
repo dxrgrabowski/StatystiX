@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1920</width>
-    <height>1080</height>
+    <width>1404</width>
+    <height>947</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -192,7 +192,7 @@ the following values will be calculated:
          <property name="frameShadow">
           <enum>QFrame::Raised</enum>
          </property>
-         <layout class="QVBoxLayout" name="verticalLayout_6">
+         <layout class="QHBoxLayout" name="horizontalLayout_4">
           <item>
            <widget class="QPushButton" name="githubButton">
             <property name="font">
@@ -217,6 +217,33 @@ border-radius: 8px;</string>
             </property>
             <property name="text">
              <string>Github</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="testButton">
+            <property name="font">
+             <font>
+              <family>Averia Serif Libre</family>
+              <pointsize>13</pointsize>
+              <italic>false</italic>
+              <bold>false</bold>
+              <underline>true</underline>
+              <strikeout>false</strikeout>
+             </font>
+            </property>
+            <property name="cursor">
+             <cursorShape>PointingHandCursor</cursorShape>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">width: 120px;
+height: 40px;
+background-color: #B4E3FF;
+color: #1E1E1E;
+border-radius: 8px;</string>
+            </property>
+            <property name="text">
+             <string>Test</string>
             </property>
            </widget>
           </item>
@@ -596,6 +623,27 @@ border-radius: 10px;</string>
     </item>
    </layout>
   </widget>
+  <widget class="QMenuBar" name="menuBar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>1404</width>
+     <height>25</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuTool">
+    <property name="title">
+     <string>Tool</string>
+    </property>
+    <addaction name="actionX_and_Y"/>
+    <addaction name="separator"/>
+    <addaction name="actionChart"/>
+    <addaction name="separator"/>
+    <addaction name="actionGenerator"/>
+   </widget>
+   <addaction name="menuTool"/>
+  </widget>
   <action name="actionPolish">
    <property name="text">
     <string>Polish</string>
@@ -604,6 +652,21 @@ border-radius: 10px;</string>
   <action name="actionEnglish">
    <property name="text">
     <string>English</string>
+   </property>
+  </action>
+  <action name="actionX_and_Y">
+   <property name="text">
+    <string>X and Y</string>
+   </property>
+  </action>
+  <action name="actionChart">
+   <property name="text">
+    <string>Chart</string>
+   </property>
+  </action>
+  <action name="actionGenerator">
+   <property name="text">
+    <string>Generator</string>
    </property>
   </action>
  </widget>

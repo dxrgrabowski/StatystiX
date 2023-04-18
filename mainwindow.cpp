@@ -8,6 +8,8 @@
 #include <QDebug>
 #include <QDesktopServices>
 #include "Dataset.h"
+//#include "testdatagenerator.h"
+
 
 
 MainWindow::MainWindow(QWidget *parent)
@@ -92,3 +94,17 @@ void MainWindow::on_githubButton_clicked()
     QDesktopServices::openUrl(QUrl("https://github.com/dxrgrabowski/StatystiX", QUrl::TolerantMode));
 }
 
+
+void MainWindow::on_testButton_clicked()
+{
+    std::vector<QPointF> points = {{0, 0}, {1, 1}, {2, 2}, {3, 3}};
+
+
+//        JsonTestDataGenerator jsonGenerator(0, 100, 10);
+//        jsonGenerator.generateTestData("testData.json");
+
+//        CsvTestDataGenerator csvGenerator(0, 100, 10);
+//        csvGenerator.generateTestData("testData.csv");
+
+
+}

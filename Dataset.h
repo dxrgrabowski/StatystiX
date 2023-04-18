@@ -1,6 +1,5 @@
 #ifndef DATASET_H
 #define DATASET_H
-#include "Dataset.h"
 #include <QJsonDocument>
 #include <QJsonObject>
 #include <QJsonArray>

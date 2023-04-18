@@ -19,8 +19,14 @@ set(PROJECT_SOURCES
         mainwindow.cpp
         mainwindow.h
         mainwindow.ui    
+        graph.ui
+        generator.ui
         dataset.cpp
         dataset.h
+        testdatagenerator.cpp
+        testdatagenerator.h
+        chart.cpp
+        chart.h
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)

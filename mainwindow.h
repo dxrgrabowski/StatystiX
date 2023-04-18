@@ -20,6 +20,8 @@ private slots:
 
     void on_githubButton_clicked();
 
+    void on_testButton_clicked();
+
 private:
     Ui::MainWindow *ui;
     QPair<bool, QJsonObject> parseFile(QString& filename);
