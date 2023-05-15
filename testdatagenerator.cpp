@@ -18,7 +18,7 @@ void CsvTestDataGenerator::generateTestData(const QString &fileName)
         return;
     }
 
-    QStringList headers = { "Value" };
+    QStringList headers = { "X" };
     file.write(headers.join(",").toUtf8());
     file.write("\n");
 
@@ -45,17 +45,20 @@ void JsonTestDataGenerator::generateTestData(const QString &fileName)
     }
 
     QJsonObject jsonObject;
-    jsonObject.insert("dataSize", m_dataSize);
 
     QRandomGenerator randomGenerator;
-    QJsonArray dataArray;
+    QJsonArray xArray, yArray;
+
     for (int i = 0; i < m_dataSize; i++)
     {
         int randomNumber = randomGenerator.bounded(m_minValue, m_maxValue + 1);
-        dataArray.append(randomNumber);
-    }
+        xArray.append(randomNumber);
 
-    jsonObject.insert("data", dataArray);
+        randomNumber = randomGenerator.bounded(m_minValue, m_maxValue + 1);
+        yArray.append(randomNumber);
+    }
+    jsonObject.insert("X", xArray);
+    jsonObject.insert("Y", yArray);
 
     QJsonDocument jsonDocument(jsonObject);
     file.write(jsonDocument.toJson());

@@ -5,6 +5,9 @@
 #include <QMainWindow>
 #include <QGraphicsWidget>
 #include <QChart>
+#include <QScatterSeries>
+#include <QValueAxis>
+#include <QChartView>
 
 class Chart : public QMainWindow {
 public:
@@ -23,11 +26,13 @@ public:
         // Set the axes
         QValueAxis* xAxis = new QValueAxis();
         xAxis->setTitleText("X Axis");
-        chart->setAxisX(xAxis, series);
+        chart->addAxis(xAxis, Qt::AlignBottom);
+        series->attachAxis(xAxis);
 
         QValueAxis* yAxis = new QValueAxis();
         yAxis->setTitleText("Y Axis");
-        chart->setAxisY(yAxis, series);
+        chart->addAxis(yAxis, Qt::AlignLeft);
+        series->attachAxis(yAxis);
 
         // Set the point size and shape
         series->setMarkerSize(10);

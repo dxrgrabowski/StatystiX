@@ -9,8 +9,8 @@ set(CMAKE_AUTORCC ON)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Widgets LinguistTools)
-find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets LinguistTools)
+find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Widgets LinguistTools Charts)
+find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets LinguistTools Charts)
 
 set(Calc_pl_PL.ts)
 
@@ -19,12 +19,14 @@ set(PROJECT_SOURCES
         mainwindow.cpp
         mainwindow.h
         mainwindow.ui    
-        graph.ui
-        generator.ui
         dataset.cpp
         dataset.h
         testdatagenerator.cpp
         testdatagenerator.h
+        fileparser.cpp
+        fileparser.h
+        inputform.cpp
+        inputform.h
         chart.cpp
         chart.h
 )
@@ -56,7 +58,7 @@ else()
     qt5_create_translation(QM_FILES ${CMAKE_SOURCE_DIR})
 endif()
 
-target_link_libraries(Calc PRIVATE Qt${QT_VERSION_MAJOR}::Widgets)
+target_link_libraries(Calc PRIVATE Qt${QT_VERSION_MAJOR}::Widgets Qt${QT_VERSION_MAJOR}::Charts)
 
 set_target_properties(Calc PROPERTIES
     MACOSX_BUNDLE_GUI_IDENTIFIER my.example.com

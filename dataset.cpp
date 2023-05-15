@@ -4,6 +4,7 @@ Dataset::Dataset(QJsonArray JSONdataset) : JSONdataset(JSONdataset) {
     fillDatasetFromJson();
     std::sort(dataset.begin(), dataset.end());
 }
+#include <iostream>
 
 void Dataset::debugDataset() {
     qDebug() << "Dataset:";
@@ -25,8 +26,10 @@ void Dataset::fillDatasetFromJson() {
     for (const auto& value : JSONdataset) {
         if (value.isDouble()) {
             dataset.push_back(value.toDouble());
+            std::cout<<"insert double to vector"<<std::endl;
         } else if (isInteger(value)) {
             dataset.push_back(value.toInt());
+            std::cout<<"insert int to vector"<<std::endl;
         } else {
             qWarning() << "Unsupported data type in JSON array";
         }

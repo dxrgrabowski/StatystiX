@@ -2,6 +2,16 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QFileDialog>
+#include <QMessageBox>
+#include <QJsonDocument>
+#include <QJsonObject>
+#include <QJsonArray>
+#include <QDebug>
+#include <QDesktopServices>
+#include "chart.h"
+#include "fileparser.h"
+#include "inputform.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -15,15 +25,17 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
+    InputForm inputForm;
+    FileParser parser;
 private slots:
     void on_openFileButton_clicked();
-
     void on_githubButton_clicked();
-
     void on_testButton_clicked();
+
+    void loadFile(const QString &fileName);
+
 
 private:
     Ui::MainWindow *ui;
-    QPair<bool, QJsonObject> parseFile(QString& filename);
 };
 #endif // MAINWINDOW_H

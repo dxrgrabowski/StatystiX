@@ -1,21 +1,18 @@
 #include "mainwindow.h"
 #include "./ui_mainwindow.h"
-#include <QFileDialog>
-#include <QMessageBox>
-#include <QJsonDocument>
-#include <QJsonObject>
-#include <QJsonArray>
-#include <QDebug>
-#include <QDesktopServices>
-#include "Dataset.h"
-//#include "testdatagenerator.h"
-
+#include "dataset.h"
+#include "testdatagenerator.h"
 
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
+    , inputForm(new InputForm(this))
     , ui(new Ui::MainWindow)
 {
+    //setCentralWidget(inputForm);
+
+    //connect(inputForm, &InputForm::fileSelected, this, &MainWindow::loadFile);
+
     ui->setupUi(this);
 }
 
@@ -27,11 +24,10 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_openFileButton_clicked()
 {
-    QString filename=QFileDialog::getOpenFileName(this,tr("Open File"),"C:/","JSON file (*.json)");
-    //QMessageBox::information(this,tr("File Name"), filename);
-    ui->lineEdit_pathName->setText(filename);
+    inputForm.selectFile();
+    //ui->lineEdit_pathName->setText(inputForm.selectedFile());
 
-    QPair<bool, QJsonObject> parseResult = parseFile(filename);
+    auto parseResult = parser.parseFile(inputForm.selectedFile());
 
     if (!parseResult.first) {
         return;}
@@ -42,51 +38,25 @@ void MainWindow::on_openFileButton_clicked()
     Dataset y(obj.value("y").toArray());
 
     QString XoutputText = QString("Min: %1\nMax: %2\nMean: %3\nMedian: %4\nStandard deviation: %5\nVariance: %6")
-            .arg(x.minValue())
-            .arg(x.maxValue())
-            .arg(x.meanValue())
-            .arg(x.medianValue())
-            .arg(x.standardDeviationValue())
-            .arg(x.varianceValue());
+                              .arg(x.minValue())
+                              .arg(x.maxValue())
+                              .arg(x.meanValue())
+                              .arg(x.medianValue())
+                              .arg(x.standardDeviationValue())
+                              .arg(x.varianceValue());
 
     QString YoutputText = QString("Min: %1\nMax: %2\nMean: %3\nMedian: %4\nStandard deviation: %5\nVariance: %6")
-            .arg(y.minValue())
-            .arg(y.maxValue())
-            .arg(y.meanValue())
-            .arg(y.medianValue())
-            .arg(y.standardDeviationValue())
-            .arg(y.varianceValue());
+                              .arg(y.minValue())
+                              .arg(y.maxValue())
+                              .arg(y.meanValue())
+                              .arg(y.medianValue())
+                              .arg(y.standardDeviationValue())
+                              .arg(y.varianceValue());
 
 
     ui->XoutputPlainTextEdit->setPlainText(XoutputText);
     ui->YoutputPlainTextEdit->setPlainText(YoutputText);
 }
-
-
-
-QPair<bool, QJsonObject> MainWindow::parseFile(QString& filename)
-{
-    QFile file(filename);
-
-    if(!file.open(QIODevice::ReadOnly | QIODevice::Text)){
-        QMessageBox::warning(this,tr("Error"), tr("Failed to open file"));
-        return { false, QJsonObject() };
-    }
-
-    QByteArray data = file.readAll();
-    file.close();
-
-    QJsonParseError error;
-    QJsonDocument doc = QJsonDocument::fromJson(data, &error);
-
-    if (doc.isNull()){
-        QMessageBox::warning(this, tr("Error"), tr("Failed to parse JSON"));
-        return { false, QJsonObject() };
-    }
-
-    return { true, doc.object() };
-}
-
 
 
 void MainWindow::on_githubButton_clicked()
@@ -97,14 +67,24 @@ void MainWindow::on_githubButton_clicked()
 
 void MainWindow::on_testButton_clicked()
 {
-    std::vector<QPointF> points = {{0, 0}, {1, 1}, {2, 2}, {3, 3}};
+//    std::vector<QPointF> points = {{0, 0}, {1, 1}, {2, 2}, {3, 3}};
 
+//    Chart* chart = new Chart(points); // Tworzymy obiekt wykresu
+//    chart->setAttribute(Qt::WA_DeleteOnClose);
 
-//        JsonTestDataGenerator jsonGenerator(0, 100, 10);
-//        jsonGenerator.generateTestData("testData.json");
+//    m_chart->show();
 
-//        CsvTestDataGenerator csvGenerator(0, 100, 10);
-//        csvGenerator.generateTestData("testData.csv");
+    JsonTestDataGenerator jsonGenerator(0, 999, 9);
+    jsonGenerator.generateTestData("testData.json");
+
+    CsvTestDataGenerator csvGenerator(0, 999, 9);
+    csvGenerator.generateTestData("testData.csv");
 
 
 }
+
+void MainWindow::loadFile(const QString &fileName) {
+    QMessageBox::information(this, tr("Selected File"), tr("Selected file: %1").arg(fileName));
+}
+
+
