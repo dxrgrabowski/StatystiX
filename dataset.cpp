@@ -23,13 +23,15 @@ void Dataset::debugDataset() {
 
 
 void Dataset::fillDatasetFromJson() {
-    for (const auto& value : JSONdataset) {
+    for (int i = 0; i < JSONdataset.size(); ++i) {
+        const QJsonValue& value = JSONdataset.at(i);
+
         if (value.isDouble()) {
             dataset.push_back(value.toDouble());
-            std::cout<<"insert double to vector"<<std::endl;
+            std::cout << "insert double to vector" << std::endl;
         } else if (isInteger(value)) {
             dataset.push_back(value.toInt());
-            std::cout<<"insert int to vector"<<std::endl;
+            std::cout << "insert int to vector" << std::endl;
         } else {
             qWarning() << "Unsupported data type in JSON array";
         }
@@ -116,7 +118,7 @@ bool Dataset::isInteger(double d) {
 
 
 
-bool Dataset::isInteger(QJsonValueRef value)
+bool Dataset::isInteger(QJsonValue value)
 {
     if (value.isDouble()) {
         double d = value.toDouble();
@@ -136,10 +138,12 @@ bool Dataset::isInteger(QJsonValueRef value)
 
 
 
-double Dataset::toDouble (const std::variant<int, double>& value) const {
-    if (std::holds_alternative<int>(value)) {
-        return static_cast<double>(std::get<int>(value));
-    } else {
-        return std::get<double>(value);
-    }
+double Dataset::toDouble(const std::variant<int, double>& value) const {
+    return std::visit([](const auto& arg) -> double {
+        if constexpr (std::is_same_v<decltype(arg), int>) {
+            return static_cast<double>(arg);
+        } else {
+            return arg;
+        }
+    }, value);
 }

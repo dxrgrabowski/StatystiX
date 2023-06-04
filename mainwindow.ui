@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1568</width>
-    <height>1019</height>
+    <width>1506</width>
+    <height>949</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -64,7 +64,7 @@ background-color: #3A4952;
       </property>
       <layout class="QVBoxLayout" name="verticalLayout_2">
        <item>
-        <widget class="QWidget" name="widget" native="true">
+        <widget class="QWidget" name="interfaceButtons" native="true">
          <property name="styleSheet">
           <string notr="true">margin-left: 5px;
 margin-right: 5px;</string>
@@ -393,9 +393,9 @@ padding-bottom: -21px;</string>
            </widget>
           </item>
           <item>
-           <widget class="QStackedWidget" name="rightMenuSlider">
+           <widget class="QStackedWidget" name="stackedWidget">
             <property name="currentIndex">
-             <number>0</number>
+             <number>1</number>
             </property>
             <widget class="QWidget" name="XandY">
              <property name="minimumSize">
@@ -414,7 +414,7 @@ padding-bottom: -21px;</string>
                  </sizepolicy>
                 </property>
                 <layout class="QVBoxLayout" name="verticalLayout_4">
-                 <item alignment="Qt::AlignHCenter|Qt::AlignTop">
+                 <item alignment="Qt::AlignHCenter|Qt::AlignVCenter">
                   <widget class="QFrame" name="Input_2">
                    <property name="sizePolicy">
                     <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
@@ -445,7 +445,7 @@ padding-bottom: -21px;</string>
                    </property>
                    <layout class="QVBoxLayout" name="verticalLayout_13">
                     <item alignment="Qt::AlignLeft|Qt::AlignTop">
-                     <widget class="QLabel" name="pathLabel_2">
+                     <widget class="QLabel" name="pathLabelXY">
                       <property name="font">
                        <font>
                         <family>Averia Serif Libre</family>
@@ -463,10 +463,10 @@ padding-bottom: -21px;</string>
                      </widget>
                     </item>
                     <item alignment="Qt::AlignHCenter">
-                     <widget class="QWidget" name="InputForm_2" native="true">
+                     <widget class="QWidget" name="InputFormXY" native="true">
                       <layout class="QHBoxLayout" name="horizontalLayout_7">
                        <item alignment="Qt::AlignLeft|Qt::AlignTop">
-                        <widget class="QLineEdit" name="lineEdit_pathName_2">
+                        <widget class="QLineEdit" name="pathNameXY">
                          <property name="sizePolicy">
                           <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
                            <horstretch>0</horstretch>
@@ -546,10 +546,10 @@ border-radius: 8px;</string>
                    </layout>
                   </widget>
                  </item>
-                 <item>
+                 <item alignment="Qt::AlignVCenter">
                   <widget class="QWidget" name="Output_2" native="true">
                    <property name="sizePolicy">
-                    <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                    <sizepolicy hsizetype="Preferred" vsizetype="Maximum">
                      <horstretch>0</horstretch>
                      <verstretch>0</verstretch>
                     </sizepolicy>
@@ -775,7 +775,7 @@ border-radius: 10px;</string>
                      <widget class="QWidget" name="InputForm_3" native="true">
                       <layout class="QHBoxLayout" name="horizontalLayout_9">
                        <item alignment="Qt::AlignLeft|Qt::AlignTop">
-                        <widget class="QLineEdit" name="lineEdit_pathName_3">
+                        <widget class="QLineEdit" name="pathNameGraph">
                          <property name="sizePolicy">
                           <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
                            <horstretch>0</horstretch>
@@ -812,7 +812,7 @@ border-radius: 8px;</string>
                         </widget>
                        </item>
                        <item alignment="Qt::AlignTop">
-                        <widget class="QPushButton" name="openFileButton_3">
+                        <widget class="QPushButton" name="graphOpenFileButton">
                          <property name="sizePolicy">
                           <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
                            <horstretch>0</horstretch>
@@ -938,7 +938,7 @@ font: 18pt &quot;Averia Serif Libre&quot;;</string>
                      <widget class="QWidget" name="InputForm_4" native="true">
                       <layout class="QHBoxLayout" name="horizontalLayout_10">
                        <item alignment="Qt::AlignLeft|Qt::AlignTop">
-                        <widget class="QLineEdit" name="lineEdit_pathName_4">
+                        <widget class="QLineEdit" name="pathNameGenerator">
                          <property name="sizePolicy">
                           <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
                            <horstretch>0</horstretch>
@@ -975,7 +975,7 @@ border-radius: 8px;</string>
                         </widget>
                        </item>
                        <item alignment="Qt::AlignTop">
-                        <widget class="QPushButton" name="openFileButton_4">
+                        <widget class="QPushButton" name="openFileButtonGenerator">
                          <property name="sizePolicy">
                           <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
                            <horstretch>0</horstretch>
@@ -1019,8 +1019,204 @@ border-radius: 8px;</string>
                   </widget>
                  </item>
                  <item alignment="Qt::AlignHCenter|Qt::AlignVCenter">
-                  <widget class="QWidget" name="widget_4" native="true">
+                  <widget class="QWidget" name="genInput" native="true">
                    <layout class="QHBoxLayout" name="horizontalLayout_5">
+                    <item>
+                     <widget class="QGroupBox" name="groupBox_2">
+                      <property name="title">
+                       <string/>
+                      </property>
+                      <layout class="QVBoxLayout" name="verticalLayout_19">
+                       <item>
+                        <widget class="QFrame" name="frame_2">
+                         <property name="frameShape">
+                          <enum>QFrame::StyledPanel</enum>
+                         </property>
+                         <property name="frameShadow">
+                          <enum>QFrame::Raised</enum>
+                         </property>
+                         <layout class="QHBoxLayout" name="horizontalLayout_6">
+                          <item>
+                           <widget class="QLabel" name="label_3">
+                            <property name="font">
+                             <font>
+                              <family>Averia Serif Libre</family>
+                              <pointsize>16</pointsize>
+                             </font>
+                            </property>
+                            <property name="styleSheet">
+                             <string notr="true">margin-left: 10px;</string>
+                            </property>
+                            <property name="text">
+                             <string>Size:</string>
+                            </property>
+                           </widget>
+                          </item>
+                          <item>
+                           <widget class="QSpinBox" name="dataSize">
+                            <property name="layoutDirection">
+                             <enum>Qt::LeftToRight</enum>
+                            </property>
+                            <property name="styleSheet">
+                             <string notr="true">width: 120px;
+height: 50px;
+padding-left: 6px;
+background-color: #B4E3FF;
+color: #1E1E1E;
+border-radius: 8px;
+font: 14pt &quot;Averia Serif Libre&quot;;</string>
+                            </property>
+                            <property name="alignment">
+                             <set>Qt::AlignCenter</set>
+                            </property>
+                            <property name="buttonSymbols">
+                             <enum>QAbstractSpinBox::NoButtons</enum>
+                            </property>
+                            <property name="prefix">
+                             <string/>
+                            </property>
+                            <property name="maximum">
+                             <number>9999</number>
+                            </property>
+                            <property name="singleStep">
+                             <number>10</number>
+                            </property>
+                            <property name="value">
+                             <number>0</number>
+                            </property>
+                           </widget>
+                          </item>
+                         </layout>
+                        </widget>
+                       </item>
+                       <item>
+                        <widget class="QFrame" name="frame_4">
+                         <property name="frameShape">
+                          <enum>QFrame::StyledPanel</enum>
+                         </property>
+                         <property name="frameShadow">
+                          <enum>QFrame::Raised</enum>
+                         </property>
+                         <layout class="QHBoxLayout" name="horizontalLayout_12">
+                          <item>
+                           <widget class="QLabel" name="label">
+                            <property name="font">
+                             <font>
+                              <family>Averia Serif Libre</family>
+                              <pointsize>16</pointsize>
+                             </font>
+                            </property>
+                            <property name="styleSheet">
+                             <string notr="true">margin-left: 10px;</string>
+                            </property>
+                            <property name="text">
+                             <string>Min:</string>
+                            </property>
+                           </widget>
+                          </item>
+                          <item>
+                           <widget class="QSpinBox" name="minValue">
+                            <property name="layoutDirection">
+                             <enum>Qt::LeftToRight</enum>
+                            </property>
+                            <property name="styleSheet">
+                             <string notr="true">width: 120px;
+height: 50px;
+padding-left: 6px;
+background-color: #B4E3FF;
+color: #1E1E1E;
+border-radius: 8px;
+font: 14pt &quot;Averia Serif Libre&quot;;</string>
+                            </property>
+                            <property name="alignment">
+                             <set>Qt::AlignCenter</set>
+                            </property>
+                            <property name="buttonSymbols">
+                             <enum>QAbstractSpinBox::NoButtons</enum>
+                            </property>
+                            <property name="maximum">
+                             <number>9999</number>
+                            </property>
+                            <property name="singleStep">
+                             <number>10</number>
+                            </property>
+                           </widget>
+                          </item>
+                         </layout>
+                        </widget>
+                       </item>
+                       <item>
+                        <widget class="QFrame" name="frame_3">
+                         <property name="frameShape">
+                          <enum>QFrame::StyledPanel</enum>
+                         </property>
+                         <property name="frameShadow">
+                          <enum>QFrame::Raised</enum>
+                         </property>
+                         <layout class="QHBoxLayout" name="horizontalLayout_11">
+                          <item>
+                           <widget class="QLabel" name="label_2">
+                            <property name="font">
+                             <font>
+                              <family>Averia Serif Libre</family>
+                              <pointsize>16</pointsize>
+                             </font>
+                            </property>
+                            <property name="styleSheet">
+                             <string notr="true">margin-left: 10px;</string>
+                            </property>
+                            <property name="text">
+                             <string>Max:</string>
+                            </property>
+                           </widget>
+                          </item>
+                          <item>
+                           <widget class="QSpinBox" name="maxValue">
+                            <property name="layoutDirection">
+                             <enum>Qt::LeftToRight</enum>
+                            </property>
+                            <property name="styleSheet">
+                             <string notr="true">width: 120px;
+height: 50px;
+padding-left: 6px;
+background-color: #B4E3FF;
+color: #1E1E1E;
+border-radius: 8px;
+font: 14pt &quot;Averia Serif Libre&quot;;</string>
+                            </property>
+                            <property name="alignment">
+                             <set>Qt::AlignCenter</set>
+                            </property>
+                            <property name="buttonSymbols">
+                             <enum>QAbstractSpinBox::NoButtons</enum>
+                            </property>
+                            <property name="maximum">
+                             <number>9999</number>
+                            </property>
+                            <property name="singleStep">
+                             <number>10</number>
+                            </property>
+                           </widget>
+                          </item>
+                         </layout>
+                        </widget>
+                       </item>
+                      </layout>
+                     </widget>
+                    </item>
+                    <item>
+                     <spacer name="horizontalSpacer">
+                      <property name="orientation">
+                       <enum>Qt::Horizontal</enum>
+                      </property>
+                      <property name="sizeHint" stdset="0">
+                       <size>
+                        <width>40</width>
+                        <height>20</height>
+                       </size>
+                      </property>
+                     </spacer>
+                    </item>
                     <item>
                      <widget class="QWidget" name="widget_3" native="true">
                       <property name="styleSheet">
@@ -1028,7 +1224,7 @@ border-radius: 8px;</string>
                       </property>
                       <layout class="QVBoxLayout" name="verticalLayout_17">
                        <item>
-                        <widget class="QRadioButton" name="radioButton">
+                        <widget class="QRadioButton" name="radioJson">
                          <property name="cursor">
                           <cursorShape>PointingHandCursor</cursorShape>
                          </property>
@@ -1051,6 +1247,9 @@ font: 14pt &quot;Averia Serif Libre&quot;;</string>
                          <property name="orientation">
                           <enum>Qt::Vertical</enum>
                          </property>
+                         <property name="sizeType">
+                          <enum>QSizePolicy::Maximum</enum>
+                         </property>
                          <property name="sizeHint" stdset="0">
                           <size>
                            <width>20</width>
@@ -1060,7 +1259,7 @@ font: 14pt &quot;Averia Serif Libre&quot;;</string>
                         </spacer>
                        </item>
                        <item>
-                        <widget class="QRadioButton" name="radioButton_2">
+                        <widget class="QRadioButton" name="radioCsv">
                          <property name="cursor">
                           <cursorShape>PointingHandCursor</cursorShape>
                          </property>
@@ -1082,9 +1281,12 @@ font: 14pt &quot;Averia Serif Libre&quot;;</string>
                      </widget>
                     </item>
                     <item>
-                     <spacer name="horizontalSpacer">
+                     <spacer name="horizontalSpacer_2">
                       <property name="orientation">
                        <enum>Qt::Horizontal</enum>
+                      </property>
+                      <property name="sizeType">
+                       <enum>QSizePolicy::Minimum</enum>
                       </property>
                       <property name="sizeHint" stdset="0">
                        <size>

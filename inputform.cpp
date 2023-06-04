@@ -3,6 +3,7 @@
 InputForm::InputForm(QWidget *parent)
     : QWidget(parent)
     , m_fileLineEdit(new QLineEdit(this))
+    , m_folderLineEdit(new QLineEdit(this))
 {
     QFormLayout *formLayout = new QFormLayout(this);
     QPushButton *fileButton = new QPushButton(tr("Select File"), this);
@@ -16,7 +17,9 @@ InputForm::InputForm(QWidget *parent)
 QString InputForm::selectedFile() const {
     return m_fileLineEdit->text();
 }
-
+QString InputForm::selectedFolder() const {
+    return m_folderLineEdit->text();
+}
 void InputForm::selectFile() {
     const QString fileName = QFileDialog::getOpenFileName(this,
                                                           tr("Open File"), "", tr("Files (*.json *.csv)"));
@@ -24,5 +27,14 @@ void InputForm::selectFile() {
     if(!fileName.isEmpty()) {
         m_fileLineEdit->setText(fileName);
         emit fileSelected(fileName);
+    }
+}
+
+void InputForm::selectFolder() {
+    const QString folderName = QFileDialog::getExistingDirectory(this, "Open directory", "");
+
+    if(!folderName.isEmpty()) {
+        m_folderLineEdit->setText(folderName);
+        emit folderSelected(folderName);
     }
 }

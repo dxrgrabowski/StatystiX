@@ -31,7 +31,7 @@
         double varianceValue() const;
 
         bool isInteger(double d);
-        bool isInteger(QJsonValueRef value);
+        bool isInteger(QJsonValue value);
         double toDouble (const std::variant<int, double>& value) const;
     };
 

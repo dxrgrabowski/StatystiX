@@ -16,13 +16,17 @@ public:
     explicit InputForm(QWidget *parent = nullptr);
 
     QString selectedFile() const;
+    QString selectedFolder() const;
+
     void selectFile();
+    void selectFolder();
 
 signals:
     void fileSelected(const QString &fileName);
-
+    void folderSelected(const QString &fileName);
 private:
-    QLineEdit *m_fileLineEdit;
+    QLineEdit *m_fileLineEdit;   
+    QLineEdit *m_folderLineEdit;
 };
 
 #endif // INPUTFORM_H

@@ -13,39 +13,17 @@
 class TestDataGenerator
 {
 public:
-    TestDataGenerator(int minValue, int maxValue, int dataSize);
+    TestDataGenerator();
 
-    virtual void generateTestData(const QString& fileName) = 0;
-
-protected:
+    int m_dataSize = NULL;
     int m_minValue;
     int m_maxValue;
-    int m_dataSize;
-};
+    QString filePath;
 
+    QString state = "NULL";
 
-
-class JsonTestDataGenerator : public TestDataGenerator
-{
-public:
-    JsonTestDataGenerator(int minValue, int maxValue, int dataSize)
-        : TestDataGenerator(minValue, maxValue, dataSize)
-    {
-    }
-
-    void generateTestData(const QString& fileName) override;
-};
-
-
-class CsvTestDataGenerator : public TestDataGenerator
-{
-public:
-    CsvTestDataGenerator(int minValue, int maxValue, int dataSize)
-        : TestDataGenerator(minValue, maxValue, dataSize)
-    {
-    }
-
-    void generateTestData(const QString& fileName) override;
+    void generateJsonTestData();
+    void generateCsvTestData();
 };
 
 #endif // TESTDATAGENERATOR_H

@@ -30,29 +30,34 @@ QPair<bool, QJsonObject> FileParser::parseFile(const QString &filename)
     else if(extension == "csv") {
         QFile file(filename);
 
-        if(!file.open(QIODevice::ReadOnly | QIODevice::Text)){
+        if (!file.open(QIODevice::ReadOnly | QIODevice::Text)) {
             QMessageBox::warning(nullptr, "Error", "Failed to open file");
             return { false, QJsonObject() };
         }
 
-        QVariantList data;
+        QVariantList xData;
+        QVariantList yData;
 
         QTextStream stream(&file);
-        while(!stream.atEnd()){
+        stream.readLine();
+
+        while (!stream.atEnd()) {
             const QString line = stream.readLine();
             const QStringList values = line.split(",");
-            QVariantMap row;
 
-            for(int i = 0; i < values.size(); ++i){
-                row.insert(QString("Column %1").arg(i + 1), values[i]);
+            if (values.size() >= 2) {
+                xData.append(values[0]);
+                yData.append(values[1]);
             }
-
-            data.append(row);
         }
 
         file.close();
 
-        return { true, QJsonObject::fromVariantMap({{"data", data}}) };
+        QVariantMap dataMap;
+        dataMap.insert("x", xData);
+        dataMap.insert("y", yData);
+
+        return { true, QJsonObject::fromVariantMap({{"data", dataMap}}) };
     }
     else {
         QMessageBox::warning(nullptr, "Error", "Unsupported file format");

@@ -1,46 +1,41 @@
 #include "testdatagenerator.h"
 
 
-TestDataGenerator::TestDataGenerator(int minValue, int maxValue, int dataSize)
-    : m_minValue(minValue), m_maxValue(maxValue), m_dataSize(dataSize)
+TestDataGenerator::TestDataGenerator()
 {
-
 }
 
-
-
-void CsvTestDataGenerator::generateTestData(const QString &fileName)
+void TestDataGenerator::generateCsvTestData()
 {
-    QFile file(fileName);
+    QFile file(this->filePath + "/testdata.csv");
     if (!file.open(QIODevice::WriteOnly | QIODevice::Text))
     {
-        qCritical() << "Failed to open file for writing:" << fileName;
+        qCritical() << "Failed to open file for writing:" << filePath + "/testdata.csv";
         return;
     }
 
-    QStringList headers = { "X" };
-    file.write(headers.join(",").toUtf8());
-    file.write("\n");
+    QTextStream stream(&file);
+    stream << "x,y\n";  // Nagłówki
 
     QRandomGenerator randomGenerator;
 
-    for (int i = 0; i < m_dataSize; i++)
+    for (int i = 0; i < this->m_dataSize; i++)
     {
-        int randomNumber = randomGenerator.bounded(m_minValue, m_maxValue + 1);
-        file.write(QString::number(randomNumber).toUtf8());
-        file.write("\n");
+        int randomNumberX = randomGenerator.bounded(this->m_minValue, this->m_maxValue + 1);
+        int randomNumberY = randomGenerator.bounded(this->m_minValue, this->m_maxValue + 1);
+
+        stream << QString::number(randomNumberX) << "," << QString::number(randomNumberY) << "\n";
     }
 
     file.close();
 }
 
-
-void JsonTestDataGenerator::generateTestData(const QString &fileName)
+void TestDataGenerator::generateJsonTestData()
 {
-    QFile file(fileName);
+    QFile file(this->filePath + "/testdata.json");
     if (!file.open(QIODevice::WriteOnly | QIODevice::Text))
     {
-        qCritical() << "Failed to open file for writing:" << fileName;
+        qCritical() << "Failed to open file for writing:" << filePath + "/testdata.json";
         return;
     }
 
@@ -49,16 +44,16 @@ void JsonTestDataGenerator::generateTestData(const QString &fileName)
     QRandomGenerator randomGenerator;
     QJsonArray xArray, yArray;
 
-    for (int i = 0; i < m_dataSize; i++)
+    for (int i = 0; i < this->m_dataSize; i++)
     {
-        int randomNumber = randomGenerator.bounded(m_minValue, m_maxValue + 1);
+        int randomNumber = randomGenerator.bounded(this->m_minValue, this->m_maxValue + 1);
         xArray.append(randomNumber);
 
-        randomNumber = randomGenerator.bounded(m_minValue, m_maxValue + 1);
+        randomNumber = randomGenerator.bounded(this->m_minValue, this->m_maxValue + 1);
         yArray.append(randomNumber);
     }
-    jsonObject.insert("X", xArray);
-    jsonObject.insert("Y", yArray);
+    jsonObject.insert("x", xArray);
+    jsonObject.insert("y", yArray);
 
     QJsonDocument jsonDocument(jsonObject);
     file.write(jsonDocument.toJson());
