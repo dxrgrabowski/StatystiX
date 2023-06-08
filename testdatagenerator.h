@@ -24,6 +24,9 @@ public:
 
     void generateJsonTestData();
     void generateCsvTestData();
+
+    void generateNormalDistributionTestData();
+    void generateRangesDistributionTestData();
 };
 
 #endif // TESTDATAGENERATOR_H

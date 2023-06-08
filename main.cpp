@@ -1,4 +1,3 @@
-#include "chart.h"
 #include "mainwindow.h"
 
 #include <QApplication>

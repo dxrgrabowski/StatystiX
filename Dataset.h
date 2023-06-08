@@ -8,31 +8,27 @@
 #include <algorithm>
 //#include <variant>
 
-    class Dataset {
+class Dataset {
 
-        QJsonArray JSONdataset;
+public:
 
-        std::vector<std::variant<int, double>> dataset;
+    std::vector<std::variant<int, double>> dataset;
+    Dataset(std::vector<std::variant<int, double>> dataset);
+    Dataset() = default;
 
-        public:
+    std::variant<int, double> at(int index){
+        return dataset[index];
+    }
 
-        Dataset(QJsonArray JSONdataset);
+    double minValue() const;
+    double maxValue() const;
+    double meanValue() const;
+    double medianValue() const;
+    double standardDeviationValue() const;
+    double varianceValue() const;
 
-
-        void debugDataset();
-        void fillDatasetFromJson();
-
-
-        double minValue() const;
-        double maxValue() const;
-        double meanValue() const;
-        double medianValue() const;
-        double standardDeviationValue() const;
-        double varianceValue() const;
-
-        bool isInteger(double d);
-        bool isInteger(QJsonValue value);
-        double toDouble (const std::variant<int, double>& value) const;
-    };
+    bool isInteger(double d);
+    bool isInteger(QJsonValue value);
+ };
 
 #endif // DATASET_H

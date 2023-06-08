@@ -1,7 +1,6 @@
 #include "mainwindow.h"
 #include "./ui_mainwindow.h"
 #include "chart.h"
-#include "dataset.h"
 #include "testdatagenerator.h"
 
 
@@ -10,10 +9,6 @@ MainWindow::MainWindow(QWidget *parent)
     , inputForm(new InputForm(this))
     , ui(new Ui::MainWindow)
 {
-    //setCentralWidget(inputForm);
-
-    //connect(inputForm, &InputForm::fileSelected, this, &MainWindow::loadFile);
-
     ui->setupUi(this);
 }
 
@@ -26,17 +21,15 @@ MainWindow::~MainWindow()
 void MainWindow::on_openFileButton_clicked()
 {
     inputForm.selectFile();
+    if(inputForm.selectedFile().contains(".json")){
+        parser.validateJsonFile(inputForm.selectedFile());
+    }
     ui->pathNameXY->setText(inputForm.selectedFile());
 
-    auto parseResult = parser.parseFile(inputForm.selectedFile());
+    auto res = parser.parseFile(inputForm.selectedFile());
 
-    if (!parseResult.first) {
-        return;}
-
-    QJsonObject obj = parseResult.second;
-
-    Dataset x(obj.value("x").toArray());
-    Dataset y(obj.value("y").toArray());
+    Dataset x = res.first;
+    Dataset y = res.second;
 
     QString XoutputText = QString("Min: %1\nMax: %2\nMean: %3\nMedian: %4\nStandard deviation: %5\nVariance: %6")
                               .arg(x.minValue())
@@ -160,7 +153,7 @@ void MainWindow::on_pushButton_2_clicked()
     }
 
     else if(testDataGen.state == "csv"){
-        testDataGen.generateCsvTestData();
+        testDataGen.generateNormalDistributionTestData();
     }
 }
 
@@ -168,37 +161,29 @@ void MainWindow::on_pushButton_clicked()
 {
     std::vector<QPointF> points;
 
-    auto parseResult = parser.parseFile(inputForm.selectedFile());
-    if (!parseResult.first) {
-        return;}
+    auto res = parser.parseFile(inputForm.selectedFile());
+    Dataset xArray = res.first;
+    Dataset yArray = res.second;
 
-    QJsonObject obj = parseResult.second;
-
-    if (obj.contains("x") && obj.contains("y")) {
-        QJsonValue xVal = obj.value("x");
-        QJsonValue yVal = obj.value("y");
-
-        if (xVal.isArray() && yVal.isArray()) {
-            QJsonArray xArray = xVal.toArray();
-            QJsonArray yArray = yVal.toArray();
-
-            if (xArray.size() == yArray.size()) {
-                for (int i = 0; i < xArray.size(); ++i) {
-                    if (xArray[i].isDouble() && yArray[i].isDouble()) {
-                        double x = xArray[i].toDouble();
-                        double y = yArray[i].toDouble();
-
-                        points.push_back(QPointF(x, y));
-                    }
-                }
+    if (xArray.dataset.size() == yArray.dataset.size()) {
+        for (int i = 0; i < xArray.dataset.size(); ++i) {
+            double x, y;
+            if (std::holds_alternative<int>(xArray.dataset[i])) {
+                x = static_cast<double>(std::get<int>(xArray.dataset[i]));
             } else {
-                QMessageBox::warning(this, "Error", "Size mismatch between 'x' and 'y' arrays");
+                x = std::get<double>(xArray.dataset[i]);
             }
-        } else {
-            QMessageBox::warning(this, "Error", "'x' and 'y' values are not arrays");
+
+            if (std::holds_alternative<int>(yArray.dataset[i])) {
+                y = static_cast<double>(std::get<int>(yArray.dataset[i]));
+            } else {
+                y = std::get<double>(yArray.dataset[i]);
+            }
+
+            points.push_back(QPointF(x, y));
         }
     } else {
-        QMessageBox::warning(this, "Error", "Required keys 'x' and 'y' not found");
+        QMessageBox::warning(this, "Error", "Size mismatch between 'x' and 'y' arrays");
     }
 
     Chart* chart = new Chart(points);
