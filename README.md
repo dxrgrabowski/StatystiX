@@ -15,4 +15,12 @@ You may run into a problem using a custom font, if the program is built using th
 https://fonts.google.com/specimen/Averia+Serif+Libre
 
 # Preview
-![image](https://user-images.githubusercontent.com/92030397/225066741-47f6b028-4961-45a8-91b2-e6b96a069f44.png)
+
+## X and Y
+![image](https://github.com/dxrgrabowski/StatystiX/assets/92030397/eeea6c48-4e51-4a58-9f23-d0f5cfd01006)
+
+## Test Data Generator 
+![image](https://github.com/dxrgrabowski/StatystiX/assets/92030397/6e79db44-abf5-46d9-ab98-5938f5087906)
+
+## Chart Generator 
+![image](https://github.com/dxrgrabowski/StatystiX/assets/92030397/89ba2f91-5067-4935-8567-3da3c8bc7934)
